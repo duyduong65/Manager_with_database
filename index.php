@@ -15,7 +15,6 @@ $manager = new StudentManager();
 </head>
 <body>
 <form action="CRUD/insert.php" method="get">
-    <center>
         <table>
             <tr>
                 <td>Name:</td>
@@ -31,12 +30,11 @@ $manager = new StudentManager();
                 </td>
             </tr>
         </table>
-    </center>
     <table>
         <tr>
-            <td style="width: 30%">ID</td>
-            <td style="width: 30%">Name</td>
-            <td style="width: 30%">Phone Number</td>
+            <td style="width: 200px">ID</td>
+            <td style="width: 200px">Name</td>
+            <td style="width: 200px">Phone Number</td>
         </tr>
 
         <?php

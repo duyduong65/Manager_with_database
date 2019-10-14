@@ -3,20 +3,12 @@ include_once '../class/Student.php';
 include_once '../class/StudentManager.php';
 include_once '../class/DBConnect.php';
 
-
 $manager = new StudentManager();
 $index = $_GET['id'];
 
-$name = $manager->studentDB->prepare('SELECT name FROM `students` WHERE id=:id');
-$phone = $manager->studentDB->prepare('SELECT phone FROM `students` WHERE id=:id');
-$phone->bindParam(':id', $index);
-$name->bindParam(':id', $index);
-$name->execute();
-$phone->execute();
-$name = $name->fetch()['name'];
-$phone =$phone->fetch()['phone'];
-
-
+$stmt = $manager->showEdit($index);
+$name = $stmt['name'];
+$phone = $stmt['phone'];
 
 ?>
 <!doctype html>
@@ -29,12 +21,14 @@ $phone =$phone->fetch()['phone'];
     <title>Document</title>
 </head>
 <body>
-<form action="CRUD/insert.php" method="get">
-    <center>
+<form action="update.php" method="get">
         <table>
+            <tr style="display: none">
+                <td><input type="text" name="id" value="<?php echo $index ?>"></td>
+            </tr>
             <tr>
                 <td>Name:</td>
-                <td><input type="text" value="<?php echo $name ?>"></td>
+                <td><input type="text" name="name" value="<?php echo $name ?>"></td>
             </tr>
             <tr>
                 <td>Phone Number:</td>
@@ -42,16 +36,15 @@ $phone =$phone->fetch()['phone'];
             </tr>
             <tr>
                 <td>
-                    <input type="submit" value="insert">
+                    <input type="submit" value="update">
                 </td>
             </tr>
         </table>
-    </center>
     <table>
         <tr>
-            <td style="width: 30%">ID</td>
-            <td style="width: 30%">Name</td>
-            <td style="width: 30%">Phone Number</td>
+            <td style="width: 200px">ID</td>
+            <td style="width: 200px">Name</td>
+            <td style="width: 200px">Phone Number</td>
         </tr>
 
         <?php
@@ -62,11 +55,8 @@ $phone =$phone->fetch()['phone'];
                 <td><?php echo ++$key ?></td>
                 <td><?php echo $student->name; ?></td>
                 <td><?php echo $student->phone; ?></td>
-                <td><a href="CRUD/delete.php?id=<?php echo $student->id ?>">Del</a></td>
-                <td><a href="CRUD/edit.php?id=<?php echo $student->id ?>">Edit</a></td>
             </tr>
         <?php endforeach; ?>
-
     </table>
 </form>
 

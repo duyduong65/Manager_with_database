@@ -39,13 +39,20 @@ class StudentManager
         $stmt->bindParam(':id', $index);
         $stmt->execute();
     }
+    function showEdit($index){
 
-    function edit($index, $name, $phone)
+        $stmt = $this->studentDB->prepare('SELECT phone,name FROM `students` WHERE id=:id');
+        $stmt->bindParam(':id', $index);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    function update($index, $name, $phone)
     {
-        $stmt = $this->studentDB->prepare('UPDATE students SET name=(:name ) phone=(:phone) WHERE id = :id');
+        $stmt = $this->studentDB->prepare('UPDATE students SET name=:name,phone=:phone WHERE id=:id');
 
         $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':name', $phone);
+        $stmt->bindParam(':phone', $phone);
         $stmt->bindParam(':id', $index);
         $stmt->execute();
     }
