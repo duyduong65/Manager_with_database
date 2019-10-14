@@ -39,6 +39,7 @@ class StudentManager
         $stmt->bindParam(':id', $index);
         $stmt->execute();
     }
+
     function showEdit($index){
 
         $stmt = $this->studentDB->prepare('SELECT phone,name FROM `students` WHERE id=:id');
@@ -50,7 +51,6 @@ class StudentManager
     function update($index, $name, $phone)
     {
         $stmt = $this->studentDB->prepare('UPDATE students SET name=:name,phone=:phone WHERE id=:id');
-
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':phone', $phone);
         $stmt->bindParam(':id', $index);

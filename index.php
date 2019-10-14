@@ -52,6 +52,5 @@ $manager = new StudentManager();
 
     </table>
 </form>
-
 </body>
 </html>
