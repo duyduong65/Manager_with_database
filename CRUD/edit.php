@@ -5,8 +5,7 @@ include_once '../class/DBConnect.php';
 
 $manager = new StudentManager();
 $index = $_GET['id'];
-
-$stmt = $manager->showEdit($index);
+$stmt = $manager->findStudentById($index);
 $name = $stmt['name'];
 $phone = $stmt['phone'];
 

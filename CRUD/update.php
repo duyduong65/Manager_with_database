@@ -5,9 +5,10 @@ include_once '../class/DBConnect.php';
 
 $manager = new StudentManager();
 
-$index = $_GET['id'];
+$id = $_GET['id'];
 $name = $_GET['name'];
 $phone = $_GET['phone'];
-$manager->update($index,$name,$phone);
+$student = new Student($name, $phone);
+$manager->update($id, $student);
 
 header("Location:../index.php");

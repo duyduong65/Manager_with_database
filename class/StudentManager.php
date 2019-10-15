@@ -33,27 +33,27 @@ class StudentManager
         $stmt->execute();
     }
 
-    function delete($index)
+    function delete($id)
     {
         $stmt = $this->studentDB->prepare('DELETE FROM students WHERE id=:id');
-        $stmt->bindParam(':id', $index);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 
-    function showEdit($index){
+    function findStudentById($id){
 
         $stmt = $this->studentDB->prepare('SELECT phone,name FROM `students` WHERE id=:id');
-        $stmt->bindParam(':id', $index);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch();
     }
 
-    function update($index, $name, $phone)
+    function update($id, $student)
     {
         $stmt = $this->studentDB->prepare('UPDATE students SET name=:name,phone=:phone WHERE id=:id');
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':id', $index);
+        $stmt->bindParam(':name', $student->name);
+        $stmt->bindParam(':phone', $student->phone);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 
